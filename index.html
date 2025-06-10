@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="India's official DigiPIN system - Convert geographic coordinates to digital addresses and vice versa">
+    <meta name="keywords" content="digipin, find my digiPin, digipin indiapost, get mydigipin, generate digipin">
     <title>What's My DigiPIN? – India's New Digital Address Finder</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="/assets/site-logo.png" sizes="32x32">
+
+    
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -71,6 +76,23 @@
             70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
             100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
         }
+        .seo-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        .dark .seo-block {
+            background: rgba(30, 41, 59, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .reset-btn {
+            background: linear-gradient(145deg, #f97316, #ea580c);
+        }
+        .reset-btn:hover {
+            background: linear-gradient(145deg, #ea580c, #c2410c);
+        }
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
@@ -117,7 +139,7 @@
                 <h2 class="text-2xl font-bold mb-6 text-center">Get Your DigiPIN</h2>
                 <div class="card rounded-xl shadow-xl p-6 mb-8">
                     <div class="text-center mb-6">
-                        <div class="digipin-display text-4xl md:text-5xl font-bold text-primary-light dark:text-primary-dark mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg inline-block digipin-animation">
+                        <div id="digipinDisplay" class="digipin-display text-4xl md:text-5xl font-bold text-primary-light dark:text-primary-dark mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg inline-block digipin-animation">
                             000-000-0000
                         </div>
                         <div id="digipinResult" class="hidden text-center mt-4">
@@ -165,9 +187,12 @@
                             <input type="text" id="manualLon" placeholder="e.g., 77.2090" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800">
                         </div>
                     </div>
-                    <div class="text-center">
+                    <div class="flex flex-wrap justify-center gap-4">
                         <button id="manualDigipinBtn" class="btn-primary px-6 py-3 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition">
                             <i class="fas fa-calculator mr-2"></i>Calculate DigiPIN
+                        </button>
+                        <button id="resetBtn" class="reset-btn px-6 py-3 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition">
+                            <i class="fas fa-rotate-left mr-2"></i>Generate for Another Location
                         </button>
                     </div>
                 </div>
@@ -207,6 +232,77 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Content Section -->
+        <section class="py-10">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-6 text-center">Understanding India's DigiPIN System</h2>
+                
+                <div class="seo-block">
+                    <h3 class="text-xl font-bold mb-3 text-primary-light dark:text-primary-dark">What is DigiPIN?</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        DigiPIN (Digital Postal Index Number) is India's revolutionary digital addressing system developed by India Post. 
+                        It converts geographic coordinates into a simple 10-digit alphanumeric code that uniquely identifies any location 
+                        within India. This system provides a standardized way to represent addresses, making location sharing more precise 
+                        and efficient than traditional address systems.
+                    </p>
+                </div>
+                
+                <div class="seo-block">
+                    <h3 class="text-xl font-bold mb-3 text-primary-light dark:text-primary-dark">How DigiPIN Works</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        The DigiPIN system uses a sophisticated grid-based algorithm to convert latitude and longitude coordinates into 
+                        a compact code. The entire country is divided into hierarchical grids, with each character in the DigiPIN 
+                        representing a specific quadrant at increasing levels of precision. This hierarchical approach allows DigiPIN 
+                        to accurately represent locations down to a few square meters with just 10 characters.
+                    </p>
+                </div>
+                
+                <div class="seo-block">
+                    <h3 class="text-xl font-bold mb-3 text-primary-light dark:text-primary-dark">Benefits of Using DigiPIN</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        DigiPIN offers numerous advantages over traditional addressing systems. It eliminates ambiguity in location 
+                        descriptions, provides precise navigation for delivery services, and simplifies address sharing in digital 
+                        communications. Emergency services can locate addresses faster, e-commerce deliveries become more efficient, 
+                        and travelers can easily share their exact locations. Additionally, DigiPIN works seamlessly across all 
+                        digital platforms without language barriers.
+                    </p>
+                </div>
+                
+                <div class="seo-block">
+                    <h3 class="text-xl font-bold mb-3 text-primary-light dark:text-primary-dark">Using DigiPIN in Daily Life</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        DigiPIN integrates seamlessly into everyday activities. Share your DigiPIN instead of complex addresses when 
+                        ordering food or packages. Use it to guide visitors to your exact location. Emergency services can respond 
+                        faster when provided with a DigiPIN. Businesses can use DigiPINs for precise delivery points. The system is 
+                        especially valuable in rural areas where traditional addressing is inconsistent, providing millions of Indians 
+                        with their first precise, digital address.
+                    </p>
+                </div>
+                
+                <div class="seo-block">
+                    <h3 class="text-xl font-bold mb-3 text-primary-light dark:text-primary-dark">DigiPIN Security Features</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        DigiPIN incorporates several security features to protect user privacy. While it encodes precise geographic 
+                        locations, it doesn't reveal personal information. The system includes checksum validation to detect errors 
+                        or tampering. For sensitive locations, users can generate temporary DigiPINs that expire after a set period. 
+                        India Post maintains strict protocols to ensure the system remains secure while providing the convenience of 
+                        precise digital addressing for all citizens.
+                    </p>
+                </div>
+                
+                <div class="seo-block">
+                    <h3 class="text-xl font-bold mb-3 text-primary-light dark:text-primary-dark">Future of Digital Addressing in India</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        India Post plans to integrate DigiPIN with all government services, creating a unified addressing system for 
+                        the nation. Future developments include mobile apps with augmented reality navigation, integration with 
+                        mapping services, and smart city applications. DigiPIN will also support India's growing e-commerce sector 
+                        by providing precise delivery locations. As adoption increases, DigiPIN has the potential to transform how 
+                        1.4 billion Indians navigate and share locations in the digital age.
+                    </p>
                 </div>
             </div>
         </section>
@@ -250,9 +346,8 @@
         </div>
     </div>
 
-    <!-- Include DigiPIN library -->
+    <!-- DigiPIN Library -->
     <script>
-        // DigiPIN Library Implementation (as provided)
         const DIGIPIN_GRID = [
             ['F', 'C', '9', '8'],
             ['J', '3', '2', '7'],
@@ -364,7 +459,7 @@
         // DOM Elements
         const themeToggle = document.getElementById('themeToggle');
         const getLocationBtn = document.getElementById('getLocationBtn');
-        const digipinDisplay = document.querySelector('.digipin-display');
+        const digipinDisplay = document.getElementById('digipinDisplay');
         const locationError = document.getElementById('locationError');
         const copyBtn = document.getElementById('copyBtn');
         const qrBtn = document.getElementById('qrBtn');
@@ -373,6 +468,7 @@
         const manualLat = document.getElementById('manualLat');
         const manualLon = document.getElementById('manualLon');
         const manualDigipinBtn = document.getElementById('manualDigipinBtn');
+        const resetBtn = document.getElementById('resetBtn');
         const digipinInput = document.getElementById('digipinInput');
         const decodeBtn = document.getElementById('decodeBtn');
         const decodeResult = document.getElementById('decodeResult');
@@ -384,6 +480,7 @@
         const qrDigipin = document.getElementById('qrDigipin');
         const downloadQrBtn = document.getElementById('downloadQrBtn');
         const qrcode = document.getElementById('qrcode');
+        const digipinResult = document.getElementById('digipinResult');
         
         // State variables
         let currentDigipin = null;
@@ -425,7 +522,7 @@
                             pdfBtn.classList.remove('opacity-50', 'cursor-not-allowed');
                             
                             // Show success
-                            document.getElementById('digipinResult').classList.remove('hidden');
+                            digipinResult.classList.remove('hidden');
                             locationError.classList.add('hidden');
                         } catch (error) {
                             locationError.textContent = error.message;
@@ -433,6 +530,7 @@
                         }
                     },
                     error => {
+                        locationError.textContent = "Unable to access location. Please enter coordinates manually below.";
                         locationError.classList.remove('hidden');
                     }
                 );
@@ -474,12 +572,49 @@
                 pdfBtn.classList.remove('opacity-50', 'cursor-not-allowed');
                 
                 // Show success
-                document.getElementById('digipinResult').classList.remove('hidden');
+                digipinResult.classList.remove('hidden');
                 locationError.classList.add('hidden');
+                
+                // Show success message
+                const successMsg = document.createElement('div');
+                successMsg.className = 'text-green-600 dark:text-green-400 mt-4';
+                successMsg.innerHTML = '<i class="fas fa-check-circle mr-2"></i>DigiPIN calculated successfully!';
+                manualDigipinBtn.parentElement.appendChild(successMsg);
+                
+                // Remove the message after 3 seconds
+                setTimeout(() => {
+                    successMsg.remove();
+                }, 3000);
             } catch (error) {
                 locationError.textContent = error.message;
                 locationError.classList.remove('hidden');
             }
+        });
+        
+        // Reset form and clear DigiPIN
+        resetBtn.addEventListener('click', () => {
+            // Clear input fields
+            manualLat.value = '';
+            manualLon.value = '';
+            
+            // Reset DigiPIN display
+            digipinDisplay.textContent = '000-000-0000';
+            currentDigipin = null;
+            currentCoords = null;
+            
+            // Disable action buttons
+            copyBtn.disabled = true;
+            copyBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            qrBtn.disabled = true;
+            qrBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            mapBtn.disabled = true;
+            mapBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            pdfBtn.disabled = true;
+            pdfBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            
+            // Hide success message
+            digipinResult.classList.add('hidden');
+            locationError.classList.add('hidden');
         });
         
         // Copy DigiPIN to clipboard
@@ -495,11 +630,13 @@
             }
         });
         
-        // Show QR Code Modal
+        // Show QR Code Modal (fixed)
         qrBtn.addEventListener('click', () => {
             if (currentDigipin) {
                 qrDigipin.textContent = currentDigipin;
                 qrcode.innerHTML = '';
+                
+                // Create QR code with the corrected syntax
                 new QRCode(qrcode, {
                     text: currentDigipin,
                     width: 200,
@@ -508,6 +645,7 @@
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
                 });
+                
                 qrModal.classList.remove('hidden');
             }
         });
@@ -594,13 +732,15 @@
         // Download QR Code
         downloadQrBtn.addEventListener('click', () => {
             const canvas = document.querySelector('#qrcode canvas');
-            const image = canvas.toDataURL('image/png');
-            const link = document.createElement('a');
-            link.href = image;
-            link.download = `DigiPIN_${currentDigipin.replace(/-/g, '')}.png`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            if (canvas) {
+                const image = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = `DigiPIN_${currentDigipin.replace(/-/g, '')}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
         });
     </script>
 </body>
