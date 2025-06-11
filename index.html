@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="India's official DigiPIN system - Convert geographic coordinates to digital addresses and vice versa">
-    <meta name="keywords" content="digipin, find my digiPin, digipin indiapost, get mydigipin, generate digipin">
+    <meta name="description" content="India's official DigiPIN system - Convert your home, shop, office address to digipin online with 100% accuracy">
+    <meta name="keywords" content="digipin, find my digiPin, digipin indiapost, calculate digipin from latitude longitude, decode digipin, generate digipin, digipin finder tool, DIGIPIN vs pincode, convert lat lon to digipin, digipin generator, digipin address, digipin code, digipin lookup">
     <title>What's My DigiPIN? – India's New Digital Address Finder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -169,7 +169,7 @@
             <div class="flex items-center space-x-4">
                 <div class="hidden md:flex space-x-2">
                     <a href="#address-to-digipin" class="nav-link">Address to DigiPIN</a>
-                    <a href="#" class="nav-link">More Tools</a>
+                    <a href="#" class="nav-link">DigiPIN to Address</a>
                 </div>
                 <button id="themeToggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
                     <i class="fas fa-moon dark:hidden"></i>
@@ -236,7 +236,7 @@
                             <i class="fas fa-qrcode mr-2"></i>Show QR Code
                         </button>
                         <button id="mapBtn" class="btn-secondary px-4 py-2 rounded-lg text-white font-medium shadow hover:shadow-md transition opacity-50 cursor-not-allowed" disabled>
-                            <i class="fas fa-map-marked-alt mr-2"></i>Open in Maps
+                            <i class="fas fa-map-marked-alt mr-2"></i>Open Location in Maps
                         </button>
                         <button id="pdfBtn" class="btn-secondary px-4 py-2 rounded-lg text-white font-medium shadow hover:shadow-md transition opacity-50 cursor-not-allowed" disabled>
                             <i class="fas fa-file-pdf mr-2"></i>Download PDF
@@ -271,10 +271,10 @@
             </div>
         </section>
 
-        <!-- Section 2: Decode DigiPIN -->
+        <!-- Section 2: DigiPIN To Address -->
         <section id="decode-digipin" class="py-10">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-2xl font-bold mb-6 text-center">Decode DigiPIN</h2>
+                <h2 class="text-2xl font-bold mb-6 text-center">DigiPIN To Address</h2>
                 <div class="card rounded-xl shadow-xl p-6">
                     <div class="mb-6">
                         <label for="digipinInput" class="block mb-2 font-medium">Enter DigiPIN</label>
@@ -478,7 +478,7 @@
                     
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFAQ(5)">
-                            <span>Is there an official DigiPIN app?</span>
+                            <span>What is Digipin vs Pincode?</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer" id="faq-answer-5">
@@ -489,6 +489,20 @@
                             </p>
                         </div>
                     </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(5)">
+                            <span>How to Find Digipin of my Location?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" id="faq-answer-5">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                First you need to allow our site to access the location when asked after clicking on "Get My Location", then automatically the site will give you the digiPin generated. 
+                                Alternatvely if you have the latitude and longitude values of your location you can use that also to create the digiPin.
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -505,7 +519,7 @@
                 <a href="#" class="hover:text-blue-300 transition">About Us</a>
             </div>
             <div class="text-center text-gray-400">
-                <p>© 2025 whatsmydigipin.com – All rights reserved. Developed by the Open Source Contribution of India Post.</p>
+                <p>© 2025 whatsmydigipin.com – All rights reserved. Developed using the Open Source Contribution of India Post.</p>
             </div>
         </div>
     </footer>
