@@ -12,16 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="/assets/site-logo.png" sizes="32x32">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HV6RQWQN1M"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-HV6RQWQN1M');
-    </script>
-
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -35,6 +25,10 @@
                         secondary: {
                             light: '#0284c7',
                             dark: '#0ea5e9'
+                        },
+                        accent: {
+                            light: '#f97316',
+                            dark: '#ea580c'
                         }
                     }
                 }
@@ -45,6 +39,17 @@
         .digipin-display {
             font-family: 'Courier New', monospace;
             letter-spacing: 2px;
+            font-size: 1.75rem; /* Base size for small screens */
+        }
+        @media (min-width: 640px) {
+            .digipin-display {
+                font-size: 2.25rem; /* Medium screens */
+            }
+        }
+        @media (min-width: 768px) {
+            .digipin-display {
+                font-size: 2.5rem; /* Large screens */
+            }
         }
         .dark .card {
             background: linear-gradient(145deg, #1e293b, #0f172a);
@@ -65,6 +70,12 @@
         }
         .btn-secondary {
             background: linear-gradient(145deg, #0369a1, #0284c7);
+        }
+        .dark .btn-accent {
+            background: linear-gradient(145deg, #ea580c, #c2410c);
+        }
+        .btn-accent {
+            background: linear-gradient(145deg, #f97316, #ea580c);
         }
         .modal {
             transition: opacity 0.3s ease, transform 0.3s ease;
@@ -102,6 +113,49 @@
         .reset-btn:hover {
             background: linear-gradient(145deg, #ea580c, #c2410c);
         }
+        .range-note {
+            color: #e53e3e;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        .dark .range-note {
+            color: #fc8181;
+        }
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.5rem 0;
+        }
+        .dark .faq-item {
+            border-color: #2d3748;
+        }
+        .faq-question {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-answer.open {
+            max-height: 500px;
+            padding-top: 1rem;
+        }
+        .nav-link {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+        }
+        .nav-link:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        .dark .nav-link:hover {
+            background-color: rgba(59, 130, 246, 0.2);
+        }
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
@@ -110,9 +164,13 @@
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <h1 class="text-xl md:text-2xl font-bold text-primary-light dark:text-primary-dark">
                 <i class="fas fa-map-marker-alt mr-2"></i>
-                What's My DigiPIN? – India's New Digital Address Finder
+                What's My DigiPIN?
             </h1>
-            <div class="flex items-center">
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex space-x-2">
+                    <a href="#address-to-digipin" class="nav-link">Address to DigiPIN</a>
+                    <a href="#" class="nav-link">More Tools</a>
+                </div>
                 <button id="themeToggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
                     <i class="fas fa-moon dark:hidden"></i>
                     <i class="fas fa-sun hidden dark:block"></i>
@@ -135,6 +193,9 @@
                     <a href="#get-digipin" class="btn-primary px-6 py-3 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition">
                         <i class="fas fa-location-dot mr-2"></i>Get Your DigiPIN
                     </a>
+                    <a href="#address-to-digipin" class="btn-accent px-6 py-3 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition">
+                        <i class="fas fa-map-pin mr-2"></i>Address to DigiPIN
+                    </a>
                     <a href="#decode-digipin" class="btn-secondary px-6 py-3 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition">
                         <i class="fas fa-map-location-dot mr-2"></i>Decode a DigiPIN
                     </a>
@@ -148,7 +209,7 @@
                 <h2 class="text-2xl font-bold mb-6 text-center">Get Your DigiPIN</h2>
                 <div class="card rounded-xl shadow-xl p-6 mb-8">
                     <div class="text-center mb-6">
-                        <div id="digipinDisplay" class="digipin-display text-4xl md:text-5xl font-bold text-primary-light dark:text-primary-dark mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg inline-block digipin-animation">
+                        <div id="digipinDisplay" class="digipin-display font-bold text-primary-light dark:text-primary-dark mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg inline-block digipin-animation">
                             000-000-0000
                         </div>
                         <div id="digipinResult" class="hidden text-center mt-4">
@@ -182,6 +243,7 @@
                         </button>
                     </div>
                 </div>
+                
                 <!-- Manual Coordinate Input -->
                 <h2 class="text-2xl font-bold mb-6 text-center">Enter Coordinates Manually</h2>
                 <div class="card rounded-xl shadow-xl p-6">
@@ -189,10 +251,12 @@
                         <div>
                             <label for="manualLat" class="block mb-2 font-medium">Latitude</label>
                             <input type="text" id="manualLat" placeholder="e.g., 28.6139" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800">
+                            <p class="range-note">Latitude Range: 2.5 – 38.5 degrees north</p>
                         </div>
                         <div>
                             <label for="manualLon" class="block mb-2 font-medium">Longitude</label>
                             <input type="text" id="manualLon" placeholder="e.g., 77.2090" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800">
+                            <p class="range-note">Longitude Range: 63.5 – 99.5 degrees east</p>
                         </div>
                     </div>
                     <div class="flex flex-wrap justify-center gap-4">
@@ -239,6 +303,27 @@
                                 <i class="fas fa-map-marked-alt mr-2"></i>View on Google Maps
                             </button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Address to DigiPIN -->
+        <section id="address-to-digipin" class="py-10">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-6 text-center">Address to DigiPIN</h2>
+                <div class="card rounded-xl shadow-xl p-6">
+                    <div class="mb-6">
+                        <label for="addressInput" class="block mb-2 font-medium">Enter Address</label>
+                        <textarea id="addressInput" placeholder="Enter your full address here..." class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 h-32"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-accent px-6 py-3 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition">
+                            <i class="fas fa-search-location mr-2"></i>Convert to DigiPIN
+                        </button>
+                    </div>
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600 dark:text-gray-400">This feature is coming soon! Currently in development.</p>
                     </div>
                 </div>
             </div>
@@ -311,6 +396,99 @@
                         by providing precise delivery locations. As adoption increases, DigiPIN has the potential to transform how 
                         1.4 billion Indians navigate and share locations in the digital age.
                     </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-10">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+                
+                <div class="faq-container bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(0)">
+                            <span>What exactly is a DigiPIN?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" id="faq-answer-0">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                DigiPIN is a 10-digit alphanumeric code that represents a specific geographic location in India. 
+                                Developed by India Post, it provides a standardized way to identify any location with precision, 
+                                making it easier to share and navigate to addresses.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(1)">
+                            <span>How accurate is the DigiPIN system?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" id="faq-answer-1">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                DigiPIN can represent locations with an accuracy of approximately 3-5 meters. The system uses a 
+                                hierarchical grid approach where each character in the DigiPIN represents a smaller area, allowing 
+                                for precise location identification.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(2)">
+                            <span>Can I use DigiPIN for international locations?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" id="faq-answer-2">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                Currently, DigiPIN is designed specifically for locations within India. The coordinate ranges are 
+                                limited to Indian territory (Latitude: 2.5-38.5°N, Longitude: 63.5-99.5°E). We're exploring 
+                                expansion to other countries in future versions.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(3)">
+                            <span>Is DigiPIN replacing traditional addresses?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" id="faq-answer-3">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                DigiPIN is designed to complement traditional addresses, not replace them. It provides a precise, 
+                                digital alternative that can be used alongside conventional addresses for delivery services, 
+                                navigation, and location sharing.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(4)">
+                            <span>How do I share my DigiPIN with others?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" id="faq-answer-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                You can share your DigiPIN like any other code - via text message, email, or verbally. For digital 
+                                sharing, use the QR code feature which generates a scannable code that can be shared easily. 
+                                Recipients can decode it on this website or using the official India Post app.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(5)">
+                            <span>Is there an official DigiPIN app?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" id="faq-answer-5">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                Yes, India Post has released an official DigiPIN app available on both Android and iOS platforms. 
+                                The app includes all the features of this website plus additional tools for saving locations, 
+                                navigation, and sharing DigiPINs with contacts.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -637,20 +815,20 @@
             }
         });
         
-        // Show QR Code Modal (fixed)
+        // Show QR Code Modal
         qrBtn.addEventListener('click', () => {
             if (currentDigipin) {
                 qrDigipin.textContent = currentDigipin;
                 qrcode.innerHTML = '';
                 
-                // Create QR code with the corrected syntax
+                // Create QR code
                 new QRCode(qrcode, {
                     text: currentDigipin,
                     width: 200,
                     height: 200,
                     colorDark: "#2563eb",
                     colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
+                    correctLevel: 3 // High error correction
                 });
                 
                 qrModal.classList.remove('hidden');
@@ -749,6 +927,22 @@
                 document.body.removeChild(link);
             }
         });
+        
+        // FAQ Toggle Function
+        function toggleFAQ(index) {
+            const answer = document.getElementById(`faq-answer-${index}`);
+            const icon = document.querySelector(`#faq-answer-${index}`).previousElementSibling.querySelector('i');
+            
+            if (answer.classList.contains('open')) {
+                answer.classList.remove('open');
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                answer.classList.add('open');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        }
     </script>
 </body>
 </html>
