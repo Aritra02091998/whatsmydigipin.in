@@ -7,102 +7,10 @@
     <meta name="keywords" content="digipin blog, digipin news, digipin guide, digital addressing system, india post updates, digipin articles">
     <title>DigiPIN Blog - Latest News & Guides | What's My DigiPIN?</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/scripts/blog-collection-tailwind-config.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles/blog-collection.css">
     <link rel="icon" href="/assets/site-logo.png" sizes="32x32">
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            light: '#2563eb',
-                            dark: '#3b82f6'
-                        },
-                        secondary: {
-                            light: '#0284c7',
-                            dark: '#0ea5e9'
-                        },
-                        accent: {
-                            light: '#f97316',
-                            dark: '#ea580c'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .blog-card {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
-        }
-        .card {
-            background: linear-gradient(145deg, #f0f9ff, #e0f2fe);
-            border: 1px solid #bfdbfe;
-        }
-        .dark .card {
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            border: 1px solid #334155;
-        }
-        .dark .btn-primary {
-            background: linear-gradient(145deg, #1d4ed8, #3b82f6);
-        }
-        .btn-primary {
-            background: linear-gradient(145deg, #2563eb, #3b82f6);
-        }
-        .dark .btn-secondary {
-            background: linear-gradient(145deg, #0c4a6e, #0284c7);
-        }
-        .btn-secondary {
-            background: linear-gradient(145deg, #0369a1, #0284c7);
-        }
-        .dark .btn-accent {
-            background: linear-gradient(145deg, #ea580c, #c2410c);
-        }
-        .btn-accent {
-            background: linear-gradient(145deg, #f97316, #ea580c);
-        }
-        .seo-block {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-        .dark .seo-block {
-            background: rgba(30, 41, 59, 0.5);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        .nav-link {
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            transition: all 0.2s;
-        }
-        .nav-link:hover {
-            background-color: rgba(59, 130, 246, 0.1);
-        }
-        .dark .nav-link:hover {
-            background-color: rgba(59, 130, 246, 0.2);
-        }
-        .article-excerpt {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .category-tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            z-index: 10;
-        }
-    </style>
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
